@@ -43,33 +43,33 @@ export const Layout: FC = (props) => (
 						href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
 						rel="stylesheet"
 					/>
-					<a href="/" style={{all: 'unset', cursor: 'pointer', display: 'block'}} data-current="true" aria-current="page">
+					<a href="/" style={{ all: 'unset', cursor: 'pointer', display: 'block' }} data-current="true" aria-current="page">
 						<div
 							className="logo"
-							style={{display: 'flex', alignItems: 'center', gap: '20px', fontFamily: "'Fira Sans', sans-serif", marginBottom: '10px'}}
+							style={{ display: 'flex', alignItems: 'center', gap: '20px', fontFamily: "'Fira Sans', sans-serif", marginBottom: '10px' }}
 						>
 							<img
 								className="logo_img"
 								src="/n.png?__frsh_c=4ee4ac658a2a88e82077a949015afccbeb6e620d"
 								alt="Logo"
-								style={{height: '50px', width: '50px', border: '0px', objectFit: 'contain'}}
+								style={{ height: '50px', width: '50px', border: '0px', objectFit: 'contain' }}
 							/>
 							<div>
-								<h1 style={{fontSize: '36px', fontWeight: '500', margin: '0', lineHeight: '1.1'}}>Nyanthu</h1>
-								<p style={{margin: '0px 0 0 0', fontWeight: '200', fontSize: '16px', color: '#555'}}>
+								<h1 style={{ fontSize: '36px', fontWeight: '500', margin: '0', lineHeight: '1.1' }}>Nyanthu</h1>
+								<p style={{ margin: '0px 0 0 0', fontWeight: '200', fontSize: '16px', color: '#555' }}>
 									High quality applications and games at low cost
 								</p>
 							</div>
 						</div>
 					</a>
 					<div className="header-buttons" role="navigation" aria-label="main navigation">
-						<a href="/"><input type="button" value="Home" /></a>
-						<a href="/sites"><input type="button" value="Sites" /></a>
-						<a href="/apps"><input type="button" value="Apps" /></a>
-						<a href="/docs"><input type="button" value="Docs" /></a>
-						<a href="/policy"><input type="button" value="Policy" /></a>
-						<a href="/bot"><input type="button" value="Bot" /></a>
-						<a href="/demo"><input type="button" style={{border: '1px solid #4b5eaa'}} value="Demo" /></a>
+						<input type="button" value="Home" data-target="" />
+						<input type="button" value="Sites" data-target="sites" />
+						<input type="button" value="Apps" data-target="apps" />
+						<input type="button" value="Docs" data-target="docs" />
+						<input type="button" value="Policy" data-target="policy" />
+						<input type="button" value="Bot" data-target="bot" />
+						<input type="button" style={{ border: '1px solid #4b5eaa' }} value="Demo" data-target="/demo" />
 					</div>
 				</div>
 				<div id="content">{props.children}</div>
@@ -78,5 +78,44 @@ export const Layout: FC = (props) => (
 				</footer>
 			</div>
 		</body>
+		<script
+			dangerouslySetInnerHTML={{
+				__html: `
+				document.addEventListener('DOMContentLoaded', function () {
+								const buttons = document.querySelectorAll('[data-target]');
+								const content = document.getElementById('content');
+
+								function loadPage(target) {
+									const url = target === '' ? '/' : '/' + target;
+									fetch(url)
+										.then((response) => response.text())
+										.then((html) => {
+											const parser = new DOMParser();
+											const doc = parser.parseFromString(html, 'text/html');
+											const newContent = doc.querySelector('#content').innerHTML;
+											content.innerHTML = newContent;
+											history.pushState({ target: target }, '', url);
+
+											Prism.highlightAll();
+										});
+								}
+
+								buttons.forEach((button) => {
+									button.addEventListener('click', function () {
+										const target = this.getAttribute('data-target');
+										loadPage(target);
+									});
+								});
+
+								window.addEventListener('popstate', function (event) {
+									if (event.state && event.state.target) {
+										loadPage(event.state.target);
+									} else {
+										loadPage('');
+									}
+								});
+							});`,
+			}}
+		/>
 	</html>
 );
