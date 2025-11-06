@@ -1,9 +1,8 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "nyanthu-worker",
-	"main": "src/index.ts",
-	"compatibility_date": "2025-11-01",
-	"observability": {
+	  "name": "nyanthu-worker",
+	  "main": "src/index.tsx",
+	  "compatibility_date": "2025-11-01",	"observability": {
 		"enabled": true
 	},
 	"assets": {

@@ -1,4 +1,8 @@
-<section id="docs">
+import type { FC } from 'hono/jsx'
+
+export const docsPage: FC = () => {
+  return (
+    <section id="docs">
       <h2>Docs</h2>
 
       <details>
@@ -24,10 +28,7 @@
       <details>
         <summary>About Studio</summary>
         <div style={{ display: "flex" }}>
-          <img
-            src="/favicon2.png"
-            style={{ height: "100px", width: "auto" }}
-          />
+          <img src="/favicon2.png" style={{ height: "100px", width: "auto" }} />
           <p>
             <strong>NyanthuStudio</strong>
             <br />
@@ -40,9 +41,10 @@
           </p>
         </div>
         <p>
-          A studio founded in August 2025, dedicated to achieving ultimate
-          stability and performance — aiming to make every millisecond from
-          click to gameplay completion faster.
+          A studio founded in August 2025, dedicated to achieving ultimate stability and performance — aiming to make every
+          millisecond from click to gameplay completion faster.
         </p>
       </details>
     </section>
+  )
+}
