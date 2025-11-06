@@ -1,0 +1,235 @@
+body {
+	background-color: #ffffff;
+	font-family: 'MS PGothic', 'IPAMonaPGothic', 'Mona', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+/* 画像のドラッグ禁止 */
+.logo_img {
+	-webkit-user-drag: none; /* Chrome, Safari */
+	-moz-user-drag: none; /* Firefox */
+	-o-user-drag: none; /* Opera */
+	user-drag: none; /* 標準っぽいやつ */
+}
+
+/* テキスト選択も禁止にする場合 */
+.logo * {
+	-webkit-user-select: none; /* Chrome, Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE */
+	user-select: none; /* 標準 */
+}
+
+.container {
+	width: 80%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 20px;
+}
+h1 {
+	font-size: 24px;
+	color: #4b5eaa;
+	padding: 10px 0;
+	margin: 0;
+}
+noscript {
+	color: teal;
+}
+
+.header {
+	margin-bottom: 15px;
+}
+
+.header-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+input,
+button {
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	padding: 8px 15px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: 0.15s;
+}
+
+input:hover,
+button:hover {
+	background-color: #e9e9e9;
+}
+
+.donateBtn {
+	transition: none;
+	animation: 4.5s example-b linear infinite;
+}
+.donateBtn:hover {
+	animation: 4.5s example5 linear infinite;
+}
+@keyframes example5 {
+	0% {
+		background: #e60000;
+		border-color: #e60000;
+	}
+	14% {
+		background: #f39800;
+		border-color: #f39800;
+	}
+	28% {
+		background: #fff100;
+		border-color: #fff100;
+	}
+	42% {
+		background: #009944;
+		border-color: #009944;
+	}
+	56% {
+		background: #0068b7;
+		border-color: #0068b7;
+	}
+	70% {
+		background: #1d2088;
+		border-color: #1d2088;
+	}
+	85% {
+		background: #920783;
+		border-color: #920783;
+	}
+	100% {
+		background: #e60000;
+		border-color: #e60000;
+	}
+}
+@keyframes example-b {
+	0% {
+		border-color: #e60000;
+	}
+	14% {
+		border-color: #f39800;
+	}
+	28% {
+		border-color: #fff100;
+	}
+	42% {
+		border-color: #009944;
+	}
+	56% {
+		border-color: #0068b7;
+	}
+	70% {
+		border-color: #1d2088;
+	}
+	85% {
+		border-color: #920783;
+	}
+	100% {
+		border-color: #e60000;
+	}
+}
+
+section {
+	padding: 10px 0;
+}
+
+a {
+	text-decoration: none;
+	color: #0000ee;
+}
+a:hover {
+	text-decoration: underline;
+	color: #ee0000;
+}
+summary {
+	cursor: pointer;
+	color: #800000;
+}
+footer {
+	font-size: 12px;
+	color: #555;
+	margin-top: 30px;
+	padding: 10px 0;
+	border-top: 1px solid #ccc;
+}
+
+pre {
+	background: #1e1e1e;
+	color: #dcdcdc;
+	padding: 12px;
+	border-radius: 6px;
+	overflow-x: auto;
+}
+img {
+	max-width: 100%;
+	height: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/* account */
+.account-nav {
+	position: relative;
+	display: inline-block;
+}
+
+.avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	margin-right: 8px;
+	vertical-align: middle;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	min-width: 100%;
+	z-index: 1000;
+}
+
+.account-nav:hover .dropdown {
+	display: block;
+}
+
+.dropdown li {
+	border-bottom: none;
+}
+
+.dropdown .divider {
+	margin: 5px 0;
+}
+
+.dropdown .divider a {
+	margin-top: 5px;
+}
+.dropdown input {
+	width: 100%;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.container {
+		width: 95%;
+	}
+	.header-buttons {
+        width: 100%;
+        margin-top: 15px;
+    }
+	.header-buttons input {
+        width: 100%;
+		margin-bottom: 6px;
+        box-sizing: border-box;
+	}
+}
