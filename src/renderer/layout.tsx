@@ -33,83 +33,43 @@ export const Layout: FC = (props) => (
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 			<link rel="stylesheet" href="/base.css" />
+			<script src="/main.js"></script>
 		</head>
 		<body>
 			<div className="container">
 				<header className="hero-header">
-      <div className="hero-content">
-        <a href="/" style="all: unset; cursor: pointer; display: block" data-current="true" aria-current="page">
-          <div className="logo" style="display: flex; align-items: center; gap: 20px; font-family: 'Fira Sans', sans-serif; margin-bottom: 10px">
-            <img className="logo_img" src="/n.png" alt="Logo" style="height: 50px; width: 50px; object-fit: contain" />
-            <div style="text-align: left">
-              <h1 style="font-size: 36px; font-weight: 500; margin: 0; line-height: 1.1;">Nyanthu</h1>
-              <p style="margin: 0; font-weight: 200; font-size: 16px; color: #555;">
-                High quality applications and games at low cost
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </header>
-
-    <!-- Navigation -->
-    <header className="header-modern">
-      <div className="container">
-        <div className="nav-wrapper">
-          <input type="button" value="Home" data-target="" />
-          <input type="button" value="Sites" data-target="sites" />
-          <input type="button" value="Apps" data-target="apps" />
-          <input type="button" value="Docs" data-target="docs" />
-          <input type="button" value="Policy" data-target="policy" />
-          <input type="button" value="Bot" data-target="bot" />
-		<input type="button" value="Bot" data-target="demo" />
-        </div>
-      </div>
-    </header>
+			      <div className="hero-content">
+			        <a href="/" style="all: unset; cursor: pointer; display: block" data-current="true" aria-current="page">
+			          <div className="logo" style="display: flex; align-items: center; gap: 20px; font-family: 'Fira Sans', sans-serif; margin-bottom: 10px">
+			            <img className="logo_img" src="/n.png" alt="Logo" style="height: 50px; width: 50px; object-fit: contain" />
+			            <div style="text-align: left">
+			              <h1 style="font-size: 36px; font-weight: 500; margin: 0; line-height: 1.1;">Nyanthu</h1>
+			              <p style="margin: 0; font-weight: 200; font-size: 16px; color: #555;">
+			                High quality applications and games at low cost
+			              </p>
+			            </div>
+			          </div>
+			        </a>
+			      </div>
+			    </header>
+			    <header className="header-modern">
+			      <div className="container">
+			        <div className="nav-wrapper">
+			          <input type="button" value="Home" data-target="" />
+			          <input type="button" value="Sites" data-target="sites" />
+			          <input type="button" value="Apps" data-target="apps" />
+			          <input type="button" value="Docs" data-target="docs" />
+			          <input type="button" value="Policy" data-target="policy" />
+			          <input type="button" value="Bot" data-target="bot" />
+					<input type="button" value="Bot" data-target="demo" />
+			        </div>
+			      </div>
+			    </header>
 				<div id="content">{props.children}</div>
 				<footer>
 					<p>© 2025 Nyanthu. All rights reserved.</p>
 				</footer>
 			</div>
 		</body>
-		<script
-			dangerouslySetInnerHTML={{
-				__html: `
-				document.addEventListener('DOMContentLoaded', function () {
-								const buttons = document.querySelectorAll('[data-target]');
-								const content = document.getElementById('content');
-
-								function loadPage(target) {
-									const url = target === '' ? '/' : '/' + target;
-									fetch(url)
-										.then((response) => response.text())
-										.then((html) => {
-											const parser = new DOMParser();
-											const doc = parser.parseFromString(html, 'text/html');
-											const newContent = doc.querySelector('#content').innerHTML;
-											content.innerHTML = newContent;
-											history.pushState({ target: target }, '', url);
-
-											Prism.highlightAll();
-										});
-								}
-
-								buttons.forEach((button) => {
-									button.addEventListener('click', function () {
-										const target = this.getAttribute('data-target');
-										loadPage(target);
-									});
-								});
-
-								window.addEventListener('popstate', function (event) {
-									if (event.state && event.state.target) {
-										loadPage(event.state.target);
-									} else {
-										loadPage('');
-									}
-								});
-							});`,
-			}}
-		/>
 	</html>
 );
