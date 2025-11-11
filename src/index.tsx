@@ -6,7 +6,7 @@ import { NotFoundPage } from './renderer/pages/404';
 import { jsxRenderer } from 'hono/jsx-renderer';
 
 import { renderToString } from 'hono/jsx/ssr'
-import { PostsPage } from './renderer/pages/posts'
+import { postsPage } from './renderer/pages/posts'
 
 // Define the bindings available to our worker
 type Bindings = {
