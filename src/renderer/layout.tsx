@@ -44,6 +44,7 @@ export const Layout: FC = (props) => (
 						<input type="button" value="Sites" data-target="sites" />
 						<input type="button" value="Apps" data-target="apps" />
 						<input type="button" value="Docs" data-target="docs" />
+						<input type="button" value="Posts" data-target="posts" />
 						<input type="button" value="Policy" data-target="policy" />
 						<input type="button" value="Bot" data-target="bot" />
 					</nav>
