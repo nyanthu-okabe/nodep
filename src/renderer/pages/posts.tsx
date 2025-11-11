@@ -23,7 +23,6 @@ export const postsPage: FC = async () => {
             {p.title}
           </a>
         ))}
-      </ul>
     </section>
   )
 }
