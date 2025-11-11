@@ -26,19 +26,8 @@ app.get('/', (c) => {
 	return c.render(<HomePage />);
 });
 
-// データ取得関数
-async function fetchTitles() {
-  const res = await fetch('https://dev.to/api/articles?username=nyanchu_okabe_b2a95eb4beb')
-  if (!res.ok) throw new Error('Failed to fetch posts')
-  const posts = await res.json()
-  return posts.map((p: any) => ({
-    title: p.title,
-    url: p.url
-  }))
-}
-
 app.get('/posts', async (c) => {
-  const res = await fetch('https://dev.to/api/articles?username=user123')
+  const res = await fetch('https://dev.to/api/articles?username=nyanchu_okabe_b2a95eb4beb')
   const posts = await res.json()
   const simplified = posts.map((p: any) => ({
     title: p.title,
