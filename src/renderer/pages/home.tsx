@@ -3,12 +3,16 @@ import type { FC } from 'hono/jsx';
 export const HomePage: FC = () => {
 	return (
 		<section id="home">
-			<h2>Home</h2>
+			<section class="hero">
+				<h1 style="color: #eeeeee">Maximize comfort and speed</h1>
+				<p style="color: #dddddd">Fast and good usability, no matter how low the client specs</p>
+				<a href="/demo" class="btn">
+					View Demo
+				</a>
+			</section>
 			<p>
 				<em>"Providing interaction and happiness across borders."</em>
 			</p>
-
-			<input type="button" value="Donate to Nyanthu" data-target="donate" className="donateBtn" />
 			<p>
 				Nyanthu is a software development group experienced in technologies ranging from low-level BGFX and C++ to Godot and 3D development.
 			</p>

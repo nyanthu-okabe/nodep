@@ -3,7 +3,6 @@ import type { FC } from 'hono/jsx';
 export const appsPage: FC = () => {
 	return (
 		<section id="apps">
-			<h2>Apps</h2>
 			<p>Software download and management tool:</p>
 			<p>- The app requires the JVM.</p>
 			<p>- Supports macOS, Linux, Windows</p>

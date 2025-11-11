@@ -1,13 +1,33 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<title>Nyanthu | Software & Game Development Studio</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Nyanthu | Software & Game Development Studio</title>
-		<link rel="icon" href="/favicon2.png" type="image/png" />
-		<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+		<meta name="keywords" content="Nyanthu, Software Developer, Game Development, BGFX, Godot, Tools, Open Source, Japan" />
+		<meta property="og:title" content="Nyanthu | Software & Game Developer" />
+		<meta
+			property="og:description"
+			content="Nyanthu is a software development group creating tools, games, and experimental technologies."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://www.nyanthu.com/" />
+		<meta property="og:image" content="/favicon2.png" />
+		<meta property="og:locale" content="en_US" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Nyanthu | Software & Game Developer" />
+		<meta name="twitter:description" content="We create interactive software and games for everyone." />
+		<meta name="twitter:image" content="/favicon2.png" />
+		<link rel="canonical" href="https://www.nyanthu.com/" />
+		<link rel="icon" type="image/png" href="/favicon2.png?v=2" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon2.png?v=2" />
+		<meta name="description" content="Nyanthu is a development group creating innovative software, games, and tools." />
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 		<style>
-			/* === 基本設定 === */
 			* {
 				box-sizing: border-box;
 			}
@@ -15,7 +35,6 @@
 			body {
 				margin: 0;
 				padding: 0;
-				//font-family: 'Fira Sans', sans-serif;
 				font-family: sans-serif;
 				color: #111;
 				background-color: #fff;
@@ -29,11 +48,9 @@
 				text-decoration: underline;
 			}
 
-			/* === ナビゲーション === */
 			header.nav {
 				position: sticky;
 				top: 0;
-				//background: #f5f5f5;
 				background: #ffffff;
 				border-bottom: 1px solid #ccc;
 				z-index: 100;
@@ -83,16 +100,15 @@
 				font-weight: 600;
 			}
 
-			/* === ヒーローセクション === */
 			.hero {
-				height: 40vh; /* 画面高さの40%だけ表示 */
+				height: 40vh;
 
 				background-image: url(/dev_sc.png);
 				background-size: 100%;
 				background-repeat: no-repeat;
 
-				background-size: cover; /* 画面いっぱいにカバー */
-				background-position: center center; /* 中央を基準にトリミング */
+				background-size: cover;
+				background-position: center center;
 
 				text-align: center;
 				padding: 80px 20px 60px 20px;
@@ -101,13 +117,13 @@
 
 			.hero {
 				background-image: url(/dev_sc.png);
-				background-size: cover; /* 画面幅に合わせて拡大 */
+				background-size: cover;
 				background-repeat: no-repeat;
-				background-position: top center; /* 常に上部を表示 */
+				background-position: top center;
 				text-align: center;
 				padding: 80px 20px 60px 20px;
 				border-bottom: 1px solid #ddd;
-				height: 310px; /* 好きな高さに固定 */
+				height: 310px;
 			}
 
 			.hero h1 {
@@ -134,7 +150,6 @@
 				background: #003399;
 			}
 
-			/* === コンテンツ === */
 			main#content {
 				max-width: 860px;
 				margin: 60px auto;
@@ -149,7 +164,6 @@
 				margin-bottom: 18px;
 			}
 
-			/* === フッター === */
 			footer {
 				border-top: 1px solid #ccc;
 				text-align: center;
@@ -161,7 +175,6 @@
 	</head>
 
 	<body>
-		<!-- ナビゲーション -->
 		<header class="nav">
 			<div class="nav-wrapper">
 				<a href="/" class="logo">
@@ -178,23 +191,59 @@
 			</div>
 		</header>
 
-		<!-- ヒーロー -->
 		<section class="hero">
 			<h1 style="color: #eeeeee">Maximize comfort and speed</h1>
 			<p style="color: #dddddd">Fast and good usability, no matter how low the client specs</p>
 			<a href="/demo" class="btn">View Demo</a>
 		</section>
 
-		<!-- コンテンツ -->
 		<main id="content">
 			<h2>About</h2>
 			<p>Nyanthu is a software and game development studio focused on efficient, low-level systems and modern aesthetics.</p>
 			<p>We build tools, frameworks, and experimental projects with C++, Java, and Rust — always with simplicity in mind.</p>
 		</main>
 
-		<!-- フッター -->
 		<footer>
 			<p>© 2025 Nyanthu. All rights reserved.</p>
 		</footer>
 	</body>
+	<script
+		dangerouslySetInnerHTML={{
+			__html: `
+			document.addEventListener('DOMContentLoaded', function () {
+							const buttons = document.querySelectorAll('[data-target]');
+							const content = document.getElementById('content');
+
+							function loadPage(target) {
+								const url = target === '' ? '/' : '/' + target;
+								fetch(url)
+									.then((response) => response.text())
+									.then((html) => {
+										const parser = new DOMParser();
+										const doc = parser.parseFromString(html, 'text/html');
+										const newContent = doc.querySelector('#content').innerHTML;
+										content.innerHTML = newContent;
+										history.pushState({ target: target }, '', url);
+
+										Prism.highlightAll();
+									});
+							}
+
+							buttons.forEach((button) => {
+								button.addEventListener('click', function () {
+									const target = this.getAttribute('data-target');
+									loadPage(target);
+								});
+							});
+
+							window.addEventListener('popstate', function (event) {
+								if (event.state && event.state.target) {
+									loadPage(event.state.target);
+								} else {
+									loadPage('');
+								}
+							});
+						});`,
+		}}
+	/>
 </html>
