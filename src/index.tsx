@@ -25,7 +25,7 @@ app.use(trimTrailingSlash());
 
 // データ取得関数
 async function fetchTitles() {
-  const res = await fetch('https://dev.to/api/articles?username=user123')
+  const res = await fetch('https://dev.to/api/articles?username=nyanchu_okabe_b2a95eb4beb')
   if (!res.ok) throw new Error('Failed to fetch posts')
   const posts = await res.json()
   return posts.map((p: any) => ({
@@ -33,7 +33,7 @@ async function fetchTitles() {
     url: p.url
   }))
 }
-app.get('/posts', (c) => {
+app.get('/posts', async (c) => {
 	const posts = await fetchTitles()
  	return c.html(renderToString(<PostsPage posts={posts} />))
 });
