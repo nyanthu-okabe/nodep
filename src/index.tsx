@@ -5,7 +5,6 @@ import { HomePage } from './renderer/pages/home';
 import { NotFoundPage } from './renderer/pages/404';
 import { jsxRenderer } from 'hono/jsx-renderer';
 
-import { renderToString } from 'hono/jsx/ssr'
 import { postsPage } from './renderer/pages/posts'
 
 // Define the bindings available to our worker
@@ -22,6 +21,10 @@ app.use(trimTrailingSlash());
 
 // --- Page Routes ---
 
+// Root is the home page
+app.get('/', (c) => {
+	return c.render(<HomePage />);
+});
 
 // データ取得関数
 async function fetchTitles() {
@@ -33,14 +36,16 @@ async function fetchTitles() {
     url: p.url
   }))
 }
+
 app.get('/posts', async (c) => {
-	const posts = await fetchTitles()
- 	return c.html(renderToString(<PostsPage posts={posts} />))
-});
-// Root is the home page
-app.get('/', (c) => {
-	return c.render(<HomePage />);
-});
+  const res = await fetch('https://dev.to/api/articles?username=user123')
+  const posts = await res.json()
+  const simplified = posts.map((p: any) => ({
+    title: p.title,
+    url: p.url,
+  }))
+  return c.render(<postsPage posts={simplified} />)
+})
 
 // --- Dynamic Page Route ---
 app.get('/:page', async (c) => {
