@@ -14,6 +14,9 @@ export const HomePage: FC = () => {
 				<em>"Providing interaction and happiness across borders."</em>
 			</p>
 			<p>
+				contact: <a href="mailto:contact@nyanthu.com">contact@nyanthu.com</a>
+			</p>
+			<p>
 				Nyanthu is a software development group experienced in technologies ranging from low-level BGFX and C++ to Godot and 3D development.
 			</p>
 			<p>
