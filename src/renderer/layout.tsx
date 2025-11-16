@@ -35,10 +35,12 @@ export const Layout: FC = (props) => (
 		<body>
 			<header class="navbar">
 				<div class="nav-inner">
-					<div class="nav-left">
-						<img src="/n.png" class="nav-logo-img" alt="Logo" />
-						<a href="/" class="nav-title">Nyanthu</a>
-					</div>
+					<a href="/" class="nav-title" style="text-decoration: none;">
+						<div class="nav-left">
+							<img src="/favicon2.png" class="nav-logo-img" alt="Logo" />
+							Nyanthu
+						</div>
+					</a>
 					<nav class="nav-links">
 						<input type="button" value="Home" data-target="" />
 						<input type="button" value="Sites" data-target="sites" />
