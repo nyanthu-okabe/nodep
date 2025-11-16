@@ -33,13 +33,13 @@ export const Layout: FC = (props) => (
 		</head>
 
 		<body>
-			<header class="nav">
-				<div class="nav-wrapper">
-					<a href="/" class="logo">
-						<img src="/n.png" alt="Logo" />
-						Nyanthu
-					</a>
-					<nav>
+			<header class="navbar">
+				<div class="nav-inner">
+					<div class="nav-left">
+						<img src="/n.png" class="nav-logo-img" alt="Logo" />
+						<a href="/" class="nav-title">Nyanthu</a>
+					</div>
+					<nav class="nav-links">
 						<input type="button" value="Home" data-target="" />
 						<input type="button" value="Sites" data-target="sites" />
 						<input type="button" value="Apps" data-target="apps" />
