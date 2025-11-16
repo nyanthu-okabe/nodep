@@ -29,7 +29,7 @@ a {
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+	text-decoration: none; /* 11/16 change to none */
 }
 
 /* ナビ */
@@ -78,7 +78,7 @@ a:hover {
 	gap: 22px;
 }
 
-.nav-links input {
+.nav-links a {
 	/* Adapted from .nav-links a */
 	color: var(--muted);
 	font-size: 0.95rem;
@@ -90,13 +90,13 @@ a:hover {
 	cursor: pointer;
 }
 
-.nav-links input:hover {
+.nav-links a:hover {
 	/* Adapted from .nav-links a:hover */
 	color: var(--text);
 	opacity: 1;
 }
 
-.nav-links input[data-current='true'] {
+.nav-links a[data-current='true'] {
 	/* New style for active input */
 	color: var(--accent);
 	opacity: 1;
