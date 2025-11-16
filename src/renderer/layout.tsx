@@ -41,14 +41,15 @@ export const Layout: FC = (props) => (
 							Nyanthu
 						</div>
 					</a>
-					<nav class="nav-links">
-						<input type="button" value="Home" data-target="" />
-						<input type="button" value="Sites" data-target="sites" />
-						<input type="button" value="Apps" data-target="apps" />
-						<input type="button" value="Docs" data-target="docs" />
-						<input type="button" value="Policy" data-target="policy" />
-						<input type="button" value="Bot" data-target="bot" />
-					</nav>
+<nav class="nav-links">
+    <a href="/" data-target="">Home</a>
+    <a href="/sites" data-target="sites">Sites</a>
+    <a href="/apps" data-target="apps">Apps</a>
+    <a href="/docs" data-target="docs">Docs</a>
+    <a href="/policy" data-target="policy">Policy</a>
+    <a href="/bot" data-target="bot">Bot</a>
+</nav>
+
 				</div>
 			</header>
 
@@ -62,50 +63,49 @@ export const Layout: FC = (props) => (
 			dangerouslySetInnerHTML={{
 				__html: `
 					document.addEventListener('DOMContentLoaded', function () {
-									const buttons = document.querySelectorAll('[data-target]');
-									const content = document.getElementById('content');
+    const links = document.querySelectorAll('[data-target]');
+    const content = document.getElementById('content');
 
-									function updateNav(target) {
-										buttons.forEach(button => {
-											if (button.getAttribute('data-target') === target) {
-												button.setAttribute('data-current', 'true');
-											} else {
-												button.removeAttribute('data-current');
-											}
-										});
-									}
+    function updateNav(target) {
+        links.forEach(link => {
+            if (link.getAttribute('data-target') === target) {
+                link.setAttribute('data-current', 'true');
+            } else {
+                link.removeAttribute('data-current');
+            }
+        });
+    }
 
-									function loadPage(target) {
-										const url = target === '' ? '/' : '/' + target;
-										fetch(url)
-											.then((response) => response.text())
-											.then((html) => {
-												const parser = new DOMParser();
-												const doc = parser.parseFromString(html, 'text/html');
-												const newContent = doc.querySelector('#content').innerHTML;
-												content.innerHTML = newContent;
-												history.pushState({ target: target }, '', url);
-												updateNav(target);
-												Prism.highlightAll();
-											});
-									}
+    function loadPage(target) {
+        const url = target === '' ? '/' : '/' + target;
+        fetch(url)
+            .then(r => r.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.querySelector('#content').innerHTML;
+                content.innerHTML = newContent;
+                history.pushState({ target }, '', url);
+                updateNav(target);
+                Prism.highlightAll();
+            });
+    }
 
-									buttons.forEach((button) => {
-										button.addEventListener('click', function () {
-											const target = this.getAttribute('data-target');
-											loadPage(target);
-										});
-									});
+    links.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // ← a のページ遷移を阻止
+            const target = this.getAttribute('data-target');
+            loadPage(target);
+        });
+    });
 
-									window.addEventListener('popstate', function (event) {
-										const target = (event.state && event.state.target) ? event.state.target : '';
-										loadPage(target);
-									});
+    window.addEventListener('popstate', event => {
+        const target = event.state?.target ?? '';
+        loadPage(target);
+    });
 
-									// Set initial state
-									const initialTarget = window.location.pathname.substring(1);
-									updateNav(initialTarget);
-								});`,
+    updateNav(window.location.pathname.substring(1));
+});`,
 			}}
 		/>
 	</html>
