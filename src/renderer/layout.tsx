@@ -35,7 +35,7 @@ export const Layout: FC = (props) => (
 		<body>
 			<header class="navbar">
 				<div class="nav-inner">
-					<a href="/" class="nav-title" data-target="/">
+					<a href="/" class="nav-title" data-target="">
 						<div class="nav-left">
 							<img src="/favicon2.png" class="nav-logo-img" alt="Logo" />
 							Nyanthu
