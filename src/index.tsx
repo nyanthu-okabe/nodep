@@ -10,7 +10,7 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>();
 
 // Use the JSX renderer middleware to render JSX components.
-app.use(jsxRenderer((props, c) => <Layout {...props} c={c} />));
+app.use(jsxRenderer((props, honoContext) => <Layout {...props} honoContext={honoContext} />));
 // Use the trim trailing slash middleware to remove trailing slashes from URLs.
 app.use(trimTrailingSlash());
 

@@ -1,4 +1,4 @@
 export const asset = {
-	css: '/dist/base.css',
-	js: '/dist/v2.js',
+	css: '/static-assets/base.css',
+	js: '/static-assets/v2.js',
 };

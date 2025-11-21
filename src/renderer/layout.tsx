@@ -4,8 +4,8 @@ import ja from '../lang/ja.json';
 import { nav } from '../config/nav';
 import { asset } from '../config/asset';
 
-type Props = {
-	c: {
+type LayoutProps = {
+	honoContext: {
 		req: HonoRequest;
 	};
 	children: any;
@@ -23,9 +23,9 @@ const text = {
  * @param props The properties for the component.
  * @returns The rendered layout.
  */
-export const Layout: FC<Props> = (props) => {
+export const Layout: FC<LayoutProps> = (props) => {
 	// Determine the language from the request parameter.
-	const lang = props.c.req.param('lang') === 'ja' ? 'ja' : 'en';
+	const lang = props.honoContext.req.param('lang') === 'ja' ? 'ja' : 'en';
 	// Get the translations for the current language.
 	const t = text[lang];
 	// Create the language prefix for the URLs.
