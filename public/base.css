@@ -174,3 +174,19 @@ footer {
 	color: #666;
 	font-size: 0.9rem;
 }
+
+.loading-indicator {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: var(--accent);
+	transform: translateX(-100%);
+	transition: transform 0.3s ease;
+	z-index: 10000;
+}
+
+body.loading .loading-indicator {
+	transform: translateX(0);
+}

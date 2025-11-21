@@ -4,35 +4,33 @@ const sitesPage: FC = () => {
 	return (
 		<section id="sites">
 			<strong>About me</strong>
-			<br />
-			<a href="https://github.com/nyanthu-okabe" target="_blank" rel="noopener">
-				{' '}
-				[GitHub]{' '}
-			</a>
-			<br />
+			<div>
+				<a href="https://github.com/nyanthu-okabe" target="_blank" rel="noopener">
+					[GitHub]
+				</a>
+			</div>
 
 			<strong>Large-scale Projects</strong>
-			<br />
-			<a> [Thread](closed project) </a>
-			<br />
+			<div>
+				<a href="#!"> [Thread](closed project) </a>
+			</div>
 
 			<strong>Medium-scale Projects</strong>
-			<br />
-			<a href="https://g.nyanthu.com" target="_blank" rel="noopener">
-				{' '}
-				[NetGames]{' '}
-			</a>
-			<br />
-			<a href="https://nyanthubot.nyanthu.com" target="_blank" rel="noopener">
-				{' '}
-				[Bot]{' '}
-			</a>
-			<br />
-			<a href="https://u.nyanthu.com" target="_blank" rel="noopener">
-				{' '}
-				[Utility]{' '}
-			</a>
-			<br />
+			<div>
+				<a href="https://g.nyanthu.com" target="_blank" rel="noopener">
+					[NetGames]
+				</a>
+			</div>
+			<div>
+				<a href="https://nyanthubot.nyanthu.com" target="_blank" rel="noopener">
+					[Bot]
+				</a>
+			</div>
+			<div>
+				<a href="https://u.nyanthu.com" target="_blank" rel="noopener">
+					[Utility]
+				</a>
+			</div>
 		</section>
 	);
 };

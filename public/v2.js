@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function loadPage(path, pushState = true) {
+		document.body.classList.add('loading');
 		fetch(path)
 			.then((r) => r.text())
 			.then((html) => {
@@ -32,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (window.Prism) {
 					window.Prism.highlightAll();
 				}
+			})
+			.finally(() => {
+				document.body.classList.remove('loading');
 			});
 	}
 

@@ -1,5 +1,7 @@
-import type { FC } from 'hono/jsx';
 import { HonoRequest } from 'hono';
+import en from '../lang/en.json';
+import ja from '../lang/ja.json';
+import { nav } from '../config/nav';
 
 type Props = {
 	c: {
@@ -8,38 +10,24 @@ type Props = {
 	children: any;
 };
 
+// The translations for the different languages.
 const text = {
-	en: {
-		title: 'Nyanthu | Software & Game Development Studio',
-		description: 'Nyanthu is a development group creating innovative software, games, and tools.',
-		og_title: 'Nyanthu | Software & Game Developer',
-		og_description: 'Nyanthu is a software development group creating tools, games, and experimental technologies.',
-		twitter_title: 'Nyanthu | Software & Game Developer',
-		twitter_description: 'We create interactive software and games for everyone.',
-		keywords: 'Nyanthu, Software Developer, Game Development, BGFX, Godot, Tools, Open Source, Japan',
-		home: 'Home',
-		sites: 'Sites',
-		apps: 'Apps',
-		docs: 'Docs',
-		policy: 'Policy',
-		bot: 'Bot',
-		copyright: '© 2025 Nyanthu. All rights reserved.',
-	},
-	ja: {
-		title: 'Nyanthu | ソフトウェア＆ゲーム開発スタジオ',
-		description: 'Nyanthuは、革新的なソフトウェア、ゲーム、ツールを制作する開発グループです。',
-		og_title: 'Nyanthu | ソフトウェア＆ゲーム開発者',
-		og_description: 'Nyanthuは、ツール、ゲーム、実験的な技術を創造するソフトウェア開発グループです。',
-		twitter_title: 'Nyanthu | ソフトウェア＆ゲーム開発者',
-		twitter_description: '私たちは、すべての人のためのインタラクティブなソフトウェアとゲームを創造します。',
-		keywords: 'Nyanthu, ソフトウェア開発, ゲーム開発, BGFX, Godot, ツール, オープンソース, 日本',
-		copyright: '© 2025 Nyanthu. 無断複写・転載を禁じます。',
-	},
+	en,
+	ja,
 };
 
+/**
+ * The main layout component for the application.
+ *
+ * @param props The properties for the component.
+ * @returns The rendered layout.
+ */
 export const Layout: FC<Props> = (props) => {
+	// Determine the language from the request parameter.
 	const lang = props.c.req.param('lang') === 'ja' ? 'ja' : 'en';
+	// Get the translations for the current language.
 	const t = text[lang];
+	// Create the language prefix for the URLs.
 	const langPrefix = lang === 'en' ? '' : `/${lang}`;
 
 	return (
@@ -64,14 +52,20 @@ export const Layout: FC<Props> = (props) => {
 				<link rel="apple-touch-icon" sizes="180x180" href="/favicon2.png?v=2" />
 				<meta name="description" content={t.description} />
 
+				{/* Prism CSS for syntax highlighting */}
 				<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+				{/* Prism JS */}
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+				{/* Prism copy to clipboard plugin */}
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+				{/* Prism bash language component */}
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+				{/* The main stylesheet for the application. */}
 				<link rel="stylesheet" href="/dist/base.css" />
 			</head>
 
 			<body>
+				{/* The loading indicator for client-side navigation. */}
 				<div class="loading-indicator"></div>
 				<header class="navbar">
 					<div class="nav-inner">
@@ -81,13 +75,11 @@ export const Layout: FC<Props> = (props) => {
 								Nyanthu
 							</div>
 						</a>
-		<nav class="nav-links">
-							<a href={`/${lang}`} data-target={``}>Home</a>
-							<a href={`/${lang}/sites`} data-target={`sites`}>Sites</a>
-							<a href={`/${lang}/apps`} data-target={`apps`}>Apps</a>
-							<a href={`/${lang}/docs`} data-target={`docs`}>Docs</a>
-							<a href={`/${lang}/policy`} data-target={`policy`}>Policy</a>
-							<a href={`/${lang}/bot`} data-target={`bot`}>Bot</a>
+						<nav class="nav-links">
+							{/* Dynamically generate the navigation links from the configuration. */}
+							{nav.map((item) => (
+								<a href={`${langPrefix}${item.path}`}>{t[item.name]}</a>
+							))}
 						</nav>
 					</div>
 				</header>
@@ -98,6 +90,7 @@ export const Layout: FC<Props> = (props) => {
 					<p>{t.copyright}</p>
 				</footer>
 			</body>
+			{/* The client-side navigation script. */}
 			<script type="module" src="/dist/v2.js"></script>
 		</html>
 	);
