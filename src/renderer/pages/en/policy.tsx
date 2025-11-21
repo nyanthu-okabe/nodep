@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx'
 
-export const policyPage: FC = () => {
+const policyPage: FC = () => {
   return (
     <section id="policy">
       <h2>Privacy Policy & Terms of Use</h2>
@@ -89,3 +89,4 @@ export const policyPage: FC = () => {
     </section>
   )
 }
+export default policyPage

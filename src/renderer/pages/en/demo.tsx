@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx';
 
-export const demoPage: FC = () => {
+const demoPage: FC = () => {
 	return (
 		<section id="demo">
 			<style>
@@ -27,3 +27,4 @@ export const demoPage: FC = () => {
 		</section>
 	);
 };
+export default demoPage;

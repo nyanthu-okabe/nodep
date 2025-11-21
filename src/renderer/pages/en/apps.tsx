@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx';
 
-export const appsPage: FC = () => {
+const appsPage: FC = () => {
 	return (
 		<section id="apps">
 			<p>Software download and management tool:</p>
@@ -15,3 +15,4 @@ export const appsPage: FC = () => {
 		</section>
 	);
 };
+export default appsPage;

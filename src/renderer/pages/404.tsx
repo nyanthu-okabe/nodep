@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx'
 
-export const NotFoundPage: FC = () => {
+const NotFoundPage: FC = () => {
   return (
     <section id="not-found">
       <h2>404 - Page Not Found</h2>
@@ -11,3 +11,4 @@ export const NotFoundPage: FC = () => {
     </section>
   )
 }
+export default NotFoundPage

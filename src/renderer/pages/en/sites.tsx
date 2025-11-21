@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx';
 
-export const sitesPage: FC = () => {
+const sitesPage: FC = () => {
 	return (
 		<section id="sites">
 			<strong>About me</strong>
@@ -36,3 +36,4 @@ export const sitesPage: FC = () => {
 		</section>
 	);
 };
+export default sitesPage;

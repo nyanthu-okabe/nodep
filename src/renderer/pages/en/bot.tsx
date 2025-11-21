@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx'
 
-export const botPage: FC = () => {
+const botPage: FC = () => {
   return (
     <section id="bot">
       <iframe
@@ -12,3 +12,4 @@ export const botPage: FC = () => {
     </section>
   )
 }
+export default botPage

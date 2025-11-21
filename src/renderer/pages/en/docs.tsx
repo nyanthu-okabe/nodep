@@ -1,6 +1,6 @@
 import type { FC } from 'hono/jsx';
 
-export const docsPage: FC = () => {
+const docsPage: FC = () => {
 	return (
 		<section id="docs">
 			<details>
@@ -14,7 +14,7 @@ export const docsPage: FC = () => {
 			<details>
 				<summary>snapshot</summary>
 				<p>1.01v - NyanthuGame</p>
-				<img src="/s1.png" style={{ height: '200px', width: 'auto' }} />
+				<img src="/app_sc.png" style={{ height: '200px', width: 'auto' }} />
 			</details>
 			<details>
 				<summary>Pkgm Setup</summary>
@@ -46,3 +46,4 @@ export const docsPage: FC = () => {
 		</section>
 	);
 };
+export default docsPage;
