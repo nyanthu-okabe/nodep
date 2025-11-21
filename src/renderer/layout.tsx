@@ -2,6 +2,7 @@ import { HonoRequest } from 'hono';
 import en from '../lang/en.json';
 import ja from '../lang/ja.json';
 import { nav } from '../config/nav';
+import { asset } from '../config/asset';
 
 type Props = {
 	c: {
@@ -61,7 +62,7 @@ export const Layout: FC<Props> = (props) => {
 				{/* Prism bash language component */}
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 				{/* The main stylesheet for the application. */}
-				<link rel="stylesheet" href="/dist/base.css" />
+				<link rel="stylesheet" href={asset.css} />
 			</head>
 
 			<body>
@@ -91,7 +92,7 @@ export const Layout: FC<Props> = (props) => {
 				</footer>
 			</body>
 			{/* The client-side navigation script. */}
-			<script type="module" src="/dist/v2.js"></script>
+			<script type="module" src={asset.js}></script>
 		</html>
 	);
 };

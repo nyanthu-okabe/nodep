@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"build": "esbuild public/v2.js --minify --outfile=public/dist/v2.js && esbuild public/base.css --minify --outfile=public/dist/base.css",
+		"build": "node scripts/build.mjs",
 		"predeploy": "npm run build",
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
