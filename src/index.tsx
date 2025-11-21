@@ -40,8 +40,13 @@ app.get('/', (c) => {
 app.get('/:lang', async (c) => {
 	const { lang } = c.req.param();
 	if (lang === 'ja' || lang === 'en') {
-		const { default: Page } = await getPage(lang, 'home.tsx');
-		return c.render(<Page />);
+		try {
+			const { default: Page } = await getPage(lang, 'home.tsx');
+			return c.render(<Page />);
+		} catch (e) {
+			// If the page is not found or an error occurs during rendering, return a 404 response.
+			return c.notFound();
+		}
 	}
 	return c.notFound();
 });
