@@ -66,7 +66,8 @@ app.get('/:lang/:page', async (c) => {
 // --- Static Asset Catcher ---
 // This route catches all other requests and serves them from the ASSETS binding.
 app.get('*', async (c) => {
-	const res = await c.env.ASSETS.fetch(c.req.raw);
+	const path = c.req.raw.url.pathname.slice(1);
+	const res = await c.env.ASSETS.fetch(new Request(new URL(path, c.req.raw.url).toString(), c.req.raw));
 	if (res.status === 404) {
 		// If the asset is not found, return a 404 response.
 		return c.notFound();

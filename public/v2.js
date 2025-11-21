@@ -19,20 +19,33 @@ document.addEventListener('DOMContentLoaded', function () {
 	function loadPage(path, pushState = true) {
 		document.body.classList.add('loading');
 		fetch(path)
-			.then((r) => r.text())
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error(`Failed to fetch page: ${res.status} ${res.statusText}`);
+				}
+				return res.text();
+			})
 			.then((html) => {
 				const parser = new DOMParser();
 				const doc = parser.parseFromString(html, 'text/html');
-				const newContent = doc.querySelector('#content').innerHTML;
-				content.innerHTML = newContent;
-				if (pushState) {
-					history.pushState({ path }, '', path);
+				const newContent = doc.querySelector('#content');
+				if (newContent) {
+					content.innerHTML = newContent.innerHTML;
+					if (pushState) {
+						history.pushState({ path }, '', path);
+					}
+					updateNav(path);
+					// If Prism is loaded, highlight all code blocks
+					if (window.Prism) {
+						window.Prism.highlightAll();
+					}
+				} else {
+					throw new Error('Invalid page content');
 				}
-				updateNav(path);
-				// If Prism is loaded, highlight all code blocks
-				if (window.Prism) {
-					window.Prism.highlightAll();
-				}
+			})
+			.catch((err) => {
+				console.error(err);
+				// You can also display a user-friendly error message here
 			})
 			.finally(() => {
 				document.body.classList.remove('loading');
