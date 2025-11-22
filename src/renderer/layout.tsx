@@ -29,7 +29,7 @@ export const Layout: FC<LayoutProps> = (props) => {
 	// Get the translations for the current language.
 	const t = text[lang];
 	// Create the language prefix for the URLs.
-	const langPrefix = lang === 'en' ? '' : `/${lang}`;
+	const langPrefix = `/${lang}`;
 
 	return (
 		<html lang={lang}>
