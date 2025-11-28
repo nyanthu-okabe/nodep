@@ -17,9 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				})
 				.then((t) => {
 					const c = new DOMParser().parseFromString(t, 'text/html').querySelector('#content');
-					if (c)
-						((i.innerHTML = c.innerHTML), n && history.pushState({ path: e }, '', e), r(e), window.Prism && window.Prism.highlightAll());
-					else throw new Error('Invalid page content');
+					if (c) {
+						i.innerHTML = c.innerHTML;
+						n && history.pushState({ path: e }, '', e);
+						r(e);
+						window.Prism && window.Prism.highlightAll();
+						initializeGlobe(); // Call initializeGlobe after new content is loaded
+					} else throw new Error('Invalid page content');
 				})
 				.catch((t) => {
 					console.error(t);
@@ -41,35 +45,52 @@ document.addEventListener('DOMContentLoaded', function () {
 			a(n, !1);
 		}),
 		r(window.location.pathname));
+	initializeGlobe(); // Call initializeGlobe on initial DOMContentLoaded
 });
 import createGlobe from 'https://cdn.skypack.dev/cobe';
 
-let phi = 0;
-let canvas = document.getElementById('cobe');
+let globeInstance = null; // To store the globe instance for potential cleanup
 
-const globe = createGlobe(canvas, {
-	devicePixelRatio: 2,
-	width: canvas.clientWidth * 2,
-	height: canvas.clientHeight * 2 - 370,
-	phi: 0,
-	theta: 0,
-	dark: 1,
-	diffuse: 1.2,
-	scale: 2.5,
-	mapSamples: 16000,
-	mapBrightness: 6,
-	baseColor: [0.5, 0.5, 0.5],
-	markerColor: [1, 1, 1],
-	glowColor: [0.05, 0.05, 0.05],
-	offset: [0, 0],
-	markers: [
-		{ location: [36.3418, 140.4468], size: 0.05 }, // 茨城
-		{ location: [40.7128, -74.006], size: 0.03 }, // ニューヨークのまま
-	],
-	onRender: (state) => {
-		// Called on every animation frame.
-		// `state` will be an empty object, return updated params.
-		state.phi = phi;
-		phi += 0.005;
-	},
-});
+function initializeGlobe() {
+	const canvas = document.getElementById('cobe');
+	if (!canvas) {
+		return; // No canvas found on this page
+	}
+
+	// Destroy existing globe instance if it exists to prevent multiple globes
+	if (globeInstance) {
+		// Assuming createGlobe returns an object with a destroy method.
+		// If not, we might need a different cleanup mechanism or accept re-initialization.
+		// For now, if no destroy method, we'll let it be replaced.
+		if (typeof globeInstance.destroy === 'function') {
+			globeInstance.destroy();
+		}
+	}
+	
+	let phi = 0; // Reset phi for new globe
+
+	globeInstance = createGlobe(canvas, {
+		devicePixelRatio: 2,
+		width: canvas.clientWidth * 2,
+		height: canvas.clientHeight * 2 - 370,
+		phi: 0,
+		theta: 0,
+		dark: 1,
+		diffuse: 1.2,
+		scale: 2.5,
+		mapSamples: 16000,
+		mapBrightness: 6,
+		baseColor: [0.5, 0.5, 0.5],
+		markerColor: [1, 1, 1],
+		glowColor: [0.05, 0.05, 0.05],
+		offset: [0, 0],
+		markers: [
+			{ location: [36.3418, 140.4468], size: 0.05 }, // 茨城
+			{ location: [40.7128, -74.006], size: 0.03 }, // ニューヨークのまま
+		],
+		onRender: (state) => {
+			state.phi = phi;
+			phi += 0.005;
+		},
+	});
+}

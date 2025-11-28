@@ -98,20 +98,13 @@ a:hover {
 }
 
 #cobe {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: -1; /* Ensure it stays in the background */
-	pointer-events: none; /* Allows interaction with elements behind the canvas */
-
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%; /* hero全体に広げる */
 	height: 100%;
 	z-index: 0; /* コンテンツの後ろに置く */
+	pointer-events: none; /* Allows interaction with elements behind the canvas */
 }
 
 .hero h1,
