@@ -78,7 +78,7 @@ function initializeGlobe() {
 		theta: 0,
 		dark: 0,
 		diffuse: 1.2,
-		scale: 1,
+		scale: 2.5,
 		mapSamples: 16000,
 		mapBrightness: 6,
 		baseColor: [1, 1, 1],
