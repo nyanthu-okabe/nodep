@@ -5,8 +5,8 @@ const HomePage: FC = () => {
 		<section id="home">
 			<section class="hero">
 				<canvas id="cobe"></canvas>
-				<h1 style="color: #eeeeee">快適さと速さを最大化</h1>
-				<p style="color: #dddddd">クライアントのスペックがどんなに低くても、高速で優れたユーザビリティを</p>
+				<h1 style="color: #333333">快適さと速さを最大化</h1>
+				<p style="color: #555555">クライアントのスペックがどんなに低くても、高速で優れたユーザビリティを</p>
 				<a href="/demo" class="btn">
 					デモを見る
 				</a>
