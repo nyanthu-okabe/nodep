@@ -10,6 +10,9 @@ const HomePage: FC = () => {
 				<a href="/demo" class="btn">
 					デモを見る
 				</a>
+				<a href="mailto:contact@nyanthu.com" class="btn2">
+					コンタクト
+				</a>
 			</section>
 			<p>
 				<em>「国境を越えて交流と幸せを提供する。」</em>

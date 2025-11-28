@@ -66,9 +66,11 @@ function initializeGlobe() {
 			globeInstance.destroy();
 		}
 	}
-	
+
 	let phi = 0; // Reset phi for new globe
-	let markers = [{ location: [36.3418, 140.4468], size: 0.05 }]
+	let markers = [
+		/*{ location: [36.3418, 140.4468], size: 0.05 }*/
+	];
 
 	globeInstance = createGlobe(canvas, {
 		devicePixelRatio: 2,
@@ -87,22 +89,22 @@ function initializeGlobe() {
 		offset: [0, 0],
 		markers: markers,
 		onRender: (state) => {
-			state.phi = phi
-			phi += 0.015
-			state.markers = markers
-  		},
+			state.phi = phi;
+			phi += 0.015;
+			state.markers = markers;
+		},
 	});
 	async function addUserPin() {
-	  const res = await fetch("https://get.geojs.io/v1/ip/geo.json")
-	  const data = await res.json()
-	
-	  const lat = parseFloat(data.latitude)
-	  const lon = parseFloat(data.longitude)
-	
-	  markers.push({
-	    location: [lat, lon],
-	    size: 0.08
-	  })
+		const res = await fetch('https://get.geojs.io/v1/ip/geo.json');
+		const data = await res.json();
+
+		const lat = parseFloat(data.latitude);
+		const lon = parseFloat(data.longitude);
+
+		markers.push({
+			location: [lat, lon],
+			size: 0.08,
+		});
 	}
-	addUserPin();
+	setTimeout(addUserPin, 1000);
 }

@@ -109,7 +109,8 @@ a:hover {
 
 .hero h1,
 .hero p,
-.hero .btn {
+.hero .btn,
+.hero .btn2 {
 	position: relative;
 	z-index: 1; /* canvas の上に表示 */
 }
@@ -124,7 +125,8 @@ a:hover {
 	color: #555;
 	margin: 0 0 20px;
 }
-.hero a.btn {
+.hero a.btn,
+.hero a.btn2 {
 	display: inline-block;
 	background: #04c;
 	color: #fff;
@@ -134,8 +136,19 @@ a:hover {
 	border: none;
 	transition: background 0.1s;
 }
-.hero a.btn:hover {
+.hero a.btn:hover,
+.hero a.btn2:hover {
 	background: #039;
+}
+.hero a.btn2 {
+	background-color: rgba(255, 255, 255, 0.7); /* 白30%透明 */
+	color: #04c;
+	box-shadow: inset 0 0 0 2px #04c;
+}
+.hero a.btn2:hover {
+	background-color: rgba(255, 255, 255, 0.7); /* 白30%透明 */
+	color: #039;
+	box-shadow: inset 0 0 0 2px #039;
 }
 main#content {
 	max-width: 860px;
