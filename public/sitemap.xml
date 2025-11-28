@@ -2,34 +2,67 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- メインページ -->
   <url>
-    <loc>https://www.nyanthu.com/</loc>
+    <loc>https://www.nyanthu.com/ja</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- サブページ -->
   <url>
-    <loc>https://www.nyanthu.com/sites/</loc>
+    <loc>https://www.nyanthu.com/ja/sites</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nyanthu.com/apps/</loc>
+    <loc>https://www.nyanthu.com/ja/apps</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nyanthu.com/docs/</loc>
+    <loc>https://www.nyanthu.com/ja/docs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nyanthu.com/bot/</loc>
+    <loc>https://www.nyanthu.com/ja/bot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nyanthu.com/policy/</loc>
+    <loc>https://www.nyanthu.com/ja/policy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+	<!-- メインページ -->
+  <url>
+    <loc>https://www.nyanthu.com/en</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- サブページ -->
+  <url>
+    <loc>https://www.nyanthu.com/en/sites</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nyanthu.com/en/apps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nyanthu.com/en/docs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nyanthu.com/en/bot</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nyanthu.com/en/policy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
