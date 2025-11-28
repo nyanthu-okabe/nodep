@@ -1,1 +1,180 @@
-:root{--bg: #ffffff;--card: #f9f9f9;--text: #111111;--muted: #555555;--accent: #4b5eaa;--accent-soft: #4f5eae}*{box-sizing:border-box}html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Hiragino Kaku Gothic ProN,Noto Sans JP,Arial;background:var(--bg);color:var(--text);line-height:1.6}a{color:#04c;text-decoration:none}a:hover{text-decoration:none}.navbar{position:fixed;top:0;left:0;width:100%;backdrop-filter:blur(20px);background:#ffffffd9;border-bottom:1px solid rgba(0,0,0,.05);z-index:9999;padding:12px 0}.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}.nav-left{display:flex;align-items:center;gap:10px}.nav-logo-img{width:32px;height:32px}.nav-title{font-weight:600;font-size:1.05rem;color:var(--text);opacity:.9;text-decoration:none}.nav-links{display:flex;gap:22px}.nav-links a{color:var(--muted);font-size:.95rem;text-decoration:none;opacity:.8;transition:.15s;background:none;border:none;cursor:pointer}.nav-links a:hover{color:var(--text);opacity:1}.nav-links a[data-current=true]{color:var(--accent);opacity:1;font-weight:600}.hero{height:40vh;background-image:url(/dev_sc.png);background-size:100%;background-repeat:no-repeat;background-size:cover;background-position:center center;text-align:center;padding:80px 20px 60px;border-bottom:1px solid #ddd}.hero{background-image:url(/dev_sc.png);background-size:cover;background-repeat:no-repeat;background-position:top center;text-align:center;padding:80px 20px 60px;border-bottom:1px solid #ddd;height:310px}.hero h1{font-size:2.6rem;font-weight:600;margin:0 0 12px}.hero p{font-size:1.1rem;color:#555;margin:0 0 20px}.hero a.btn{display:inline-block;background:#04c;color:#fff;padding:8px 20px;text-decoration:none;font-weight:500;border:none;transition:background .1s}.hero a.btn:hover{background:#039}main#content{max-width:860px;margin:0 auto;padding:110px 16px 0;font-size:1rem}main h2{font-size:1.5rem;margin-bottom:10px}main p{margin-bottom:18px}footer{border-top:1px solid #ccc;text-align:center;padding:24px 10px;color:#666;font-size:.9rem}.loading-indicator{position:fixed;top:0;left:0;width:100%;height:2px;background-color:var(--accent);transform:translate(-100%);transition:transform .3s ease;z-index:10000}body.loading .loading-indicator{transform:translate(0)}
+:root {
+	--bg: #ffffff;
+	--card: #f9f9f9;
+	--text: #111111;
+	--muted: #555555;
+	--accent: #4b5eaa;
+	--accent-soft: #4f5eae;
+}
+* {
+	box-sizing: border-box;
+}
+html,
+body {
+	font-family:
+		Inter,
+		ui-sans-serif,
+		system-ui,
+		-apple-system,
+		Hiragino Kaku Gothic ProN,
+		Noto Sans JP,
+		Arial;
+	background: var(--bg);
+	color: var(--text);
+	line-height: 1.6;
+}
+a {
+	color: #04c;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	backdrop-filter: blur(20px);
+	background: #ffffffd9;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	z-index: 9999;
+	padding: 12px 0;
+}
+.nav-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.nav-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.nav-logo-img {
+	width: 32px;
+	height: 32px;
+}
+.nav-title {
+	font-weight: 600;
+	font-size: 1.05rem;
+	color: var(--text);
+	opacity: 0.9;
+	text-decoration: none;
+}
+.nav-links {
+	display: flex;
+	gap: 22px;
+}
+.nav-links a {
+	color: var(--muted);
+	font-size: 0.95rem;
+	text-decoration: none;
+	opacity: 0.8;
+	transition: 0.15s;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+.nav-links a:hover {
+	color: var(--text);
+	opacity: 1;
+}
+.nav-links a[data-current='true'] {
+	color: var(--accent);
+	opacity: 1;
+	font-weight: 600;
+}
+.hero {
+	position: relative; /* canvasを相対的に配置する基準にする */
+	height: 500px; /* 元の高さ */
+	text-align: center;
+	padding: 220px 20px 60px;
+	border-bottom: 1px solid #ddd;
+	/* background-image はもう不要 */
+}
+
+#cobe {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1; /* Ensure it stays in the background */
+	pointer-events: none; /* Allows interaction with elements behind the canvas */
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%; /* hero全体に広げる */
+	height: 100%;
+	z-index: 0; /* コンテンツの後ろに置く */
+}
+
+.hero h1,
+.hero p,
+.hero .btn {
+	position: relative;
+	z-index: 1; /* canvas の上に表示 */
+}
+
+.hero h1 {
+	font-size: 2.6rem;
+	font-weight: 600;
+	margin: 0 0 12px;
+}
+.hero p {
+	font-size: 1.1rem;
+	color: #555;
+	margin: 0 0 20px;
+}
+.hero a.btn {
+	display: inline-block;
+	background: #04c;
+	color: #fff;
+	padding: 8px 20px;
+	text-decoration: none;
+	font-weight: 500;
+	border: none;
+	transition: background 0.1s;
+}
+.hero a.btn:hover {
+	background: #039;
+}
+main#content {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 110px 16px 0;
+	font-size: 1rem;
+}
+main h2 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+main p {
+	margin-bottom: 18px;
+}
+footer {
+	border-top: 1px solid #ccc;
+	text-align: center;
+	padding: 24px 10px;
+	color: #666;
+	font-size: 0.9rem;
+}
+.loading-indicator {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: var(--accent);
+	transform: translate(-100%);
+	transition: transform 0.3s ease;
+	z-index: 10000;
+}
+body.loading .loading-indicator {
+	transform: translate(0);
+}
