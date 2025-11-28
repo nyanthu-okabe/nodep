@@ -5,8 +5,8 @@ const HomePage: FC = () => {
 		<section id="home">
 			<section class="hero">
 				<canvas id="cobe"></canvas>
-				<h1 style="color: #eeeeee">Maximize comfort and speed</h1>
-				<p style="color: #dddddd">Fast and good usability, no matter how low the client specs</p>
+				<h1 style="color: #333333">Maximize comfort and speed</h1>
+				<p style="color: #555555">Fast and good usability, no matter how low the client specs</p>
 				<a href="/demo" class="btn">
 					View Demo
 				</a>
