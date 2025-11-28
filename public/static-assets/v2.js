@@ -68,6 +68,7 @@ function initializeGlobe() {
 	}
 	
 	let phi = 0; // Reset phi for new globe
+	let markers = [{ location: [36.3418, 140.4468], size: 0.05 }]
 
 	globeInstance = createGlobe(canvas, {
 		devicePixelRatio: 2,
@@ -75,22 +76,33 @@ function initializeGlobe() {
 		height: canvas.clientHeight * 2 - 370,
 		phi: 0,
 		theta: 0,
-		dark: 1,
+		dark: 0,
 		diffuse: 1.2,
-		scale: 2.5,
+		scale: 1,
 		mapSamples: 16000,
 		mapBrightness: 6,
-		baseColor: [0.5, 0.5, 0.5],
-		markerColor: [1, 1, 1],
-		glowColor: [0.05, 0.05, 0.05],
+		baseColor: [1, 1, 1],
+		markerColor: [0.5, 0.7, 1],
+		glowColor: [1, 1, 1],
 		offset: [0, 0],
-		markers: [
-			{ location: [36.3418, 140.4468], size: 0.05 }, // 茨城
-			{ location: [40.7128, -74.006], size: 0.03 }, // ニューヨークのまま
-		],
+		markers: markers,
 		onRender: (state) => {
-			state.phi = phi;
-			phi += 0.005;
-		},
+			state.phi = phi
+			phi += 0.015
+			state.markers = markers
+  		},
 	});
+	async function addUserPin() {
+	  const res = await fetch("https://get.geojs.io/v1/ip/geo.json")
+	  const data = await res.json()
+	
+	  const lat = parseFloat(data.latitude)
+	  const lon = parseFloat(data.longitude)
+	
+	  markers.push({
+	    location: [lat, lon],
+	    size: 0.08
+	  })
+	}
+	addUserPin();
 }
