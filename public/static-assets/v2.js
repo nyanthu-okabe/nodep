@@ -68,9 +68,13 @@ function initializeGlobe() {
 	}
 
 	let phi = 0; // Reset phi for new globe
+<<<<<<< HEAD
 	let markers = [
 		/*{ location: [36.3418, 140.4468], size: 0.05 }*/
 	];
+=======
+	let markers = [{ location: [36.3418, 140.4468], size: 0.05 }];
+>>>>>>> 67a0ce159e9d0548754378e8af380a8b20d09e0a
 
 	globeInstance = createGlobe(canvas, {
 		devicePixelRatio: 2,
