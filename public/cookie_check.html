@@ -1,0 +1,11 @@
+<button id="agree">同意する</button>
+
+<script>
+	document.getElementById('agree').onclick = () => {
+		const urlParams = new URLSearchParams(location.search);
+		// Cookie を *.nyanthu.com 全体に適用
+		document.cookie = 'cookie_consent=yes; path=/; domain=localhost:8787; max-age=31536000; secure; samesite=lax';
+
+		location.href = '/';
+	};
+</script>
