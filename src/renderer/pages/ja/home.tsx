@@ -17,6 +17,11 @@ const HomePage: FC = () => {
 			<p>
 				<em>「国境を越えて交流と幸せを提供する。」</em>
 			</p>
+			<ul>
+				<li>よく考えた設計</li>
+				<li>高速な実行時間</li>
+				<li>最新の技術</li>
+			</ul>
 			<p>
 				連絡先: <a href="mailto:contact@nyanthu.com">contact@nyanthu.com</a>
 			</p>

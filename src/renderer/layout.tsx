@@ -81,6 +81,9 @@ export const Layout: FC<LayoutProps> = (props) => {
 							{nav.map((item) => (
 								<a href={`${langPrefix}${item.path}`}>{t[item.name]}</a>
 							))}
+							<a>
+								<div class="dli-apps"></div>
+							</a>
 						</nav>
 					</div>
 				</header>

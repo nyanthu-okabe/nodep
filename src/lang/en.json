@@ -12,5 +12,8 @@
 	"docs": "Docs",
 	"policy": "Policy",
 	"bot": "Bot",
+	"login": "Login",
+	"logout": "Logout",
+	"register": "Register",
 	"copyright": "© 2025 Nyanthu. All rights reserved."
 }

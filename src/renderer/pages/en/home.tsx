@@ -17,6 +17,11 @@ const HomePage: FC = () => {
 			<p>
 				<em>"Providing interaction and happiness across borders."</em>
 			</p>
+			<ul>
+				<li>Carefully bluesheet</li>
+				<li>Fastest run time</li>
+				<li>Latest technologies</li>
+			</ul>
 			<p>
 				Contact: <a href="mailto:contact@nyanthu.com">contact@nyanthu.com</a>
 			</p>

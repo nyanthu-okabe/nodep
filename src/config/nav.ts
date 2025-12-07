@@ -23,4 +23,16 @@ export const nav = [
 		name: 'bot',
 		path: '/bot',
 	},
+	{
+		name: 'login',
+		path: '/login',
+	},
+	{
+		name: 'logout',
+		path: '/logout',
+	},
+	{
+		name: 'register',
+		path: '/register',
+	},
 ];
