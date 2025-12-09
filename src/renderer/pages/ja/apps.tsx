@@ -3,15 +3,19 @@ import type { FC } from 'hono/jsx';
 const appsPage: FC = () => {
 	return (
 		<section id="apps">
-			<p>ソフトウェアのダウンロードおよび管理ツール:</p>
-			<p>- このアプリにはJVMが必要です。</p>
-			<p>- macOS, Linux, Windowsをサポート</p>
+			<h2>App</h2>
+			<h3>アプリケーションインストーラー</h3>
 			<pre>
 				<code className="language-bash">curl https://www.nyanthu.com/pkgm.sh | sh</code>
 			</pre>
 			<p>
-				<strong>説明:</strong> プラットフォーム間でソフトウェアパッケージを簡単にダウンロードおよび管理するためのツールです。
+				<strong>説明:</strong>{' '}
+				このアプリにはJVMが必要です。プラットフォーム間でソフトウェアパッケージを簡単にダウンロードおよび管理するためのツールです。
 			</p>
+			<h3>リリースされたアプリケーション</h3>
+			<ul>
+				<li>NGame</li>
+			</ul>
 		</section>
 	);
 };

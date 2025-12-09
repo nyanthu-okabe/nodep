@@ -3,7 +3,8 @@ import type { FC } from 'hono/jsx';
 const logoutPage: FC = () => {
 	return (
 		<section id="logout">
-			<h1>Logout</h1>
+			<h2>Logout</h2>
+			<input type="submit" value="Logout" />
 		</section>
 	);
 };

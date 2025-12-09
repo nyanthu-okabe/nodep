@@ -21,6 +21,7 @@ const HomePage: FC = () => {
 				<li>Carefully bluesheet</li>
 				<li>Fastest run time</li>
 				<li>Latest technologies</li>
+				<li>Simple UI</li>
 			</ul>
 			<p>
 				Contact: <a href="mailto:contact@nyanthu.com">contact@nyanthu.com</a>

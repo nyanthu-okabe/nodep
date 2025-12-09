@@ -3,6 +3,7 @@ import type { FC } from 'hono/jsx';
 const sitesPage: FC = () => {
 	return (
 		<section id="sites">
+			<h2>Sites</h2>
 			<strong>About me</strong>
 			<div>
 				<a href="https://github.com/nyanthu-okabe" target="_blank" rel="noopener">

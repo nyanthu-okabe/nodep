@@ -3,7 +3,7 @@ import type { FC } from 'hono/jsx';
 const registerPage: FC = () => {
 	return (
 		<section id="register">
-			<h1>Register</h1>
+			<h2>Register</h2>
 			<form>
 				<p>
 					<input type="text" name="username" placeholder="Username" required />

@@ -21,6 +21,7 @@ const HomePage: FC = () => {
 				<li>よく考えた設計</li>
 				<li>高速な実行時間</li>
 				<li>最新の技術</li>
+				<li>シンプルなUI</li>
 			</ul>
 			<p>
 				連絡先: <a href="mailto:contact@nyanthu.com">contact@nyanthu.com</a>
