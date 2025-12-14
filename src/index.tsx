@@ -147,7 +147,7 @@ api.post('/register', async (c) => {
 		let lang = 'en';
 		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 		const msg = lang === 'ja' ? '有効なユーザー名と、8文字以上のパスワードを入力してください。' : 'Please provide a valid username and a password with at least 8 characters.';
-		return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/register">Back to register</a></p></body></html>`, 400);
+		return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 	}
 
 	try {
@@ -203,14 +203,14 @@ api.post('/register', async (c) => {
 			let lang = 'en';
 			try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 			const msg = lang === 'ja' ? 'このユーザー名は既に使用されています。他の名前を選んでください。' : 'That username is already taken. Please choose another.';
-			return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/register">Back to register</a></p></body></html>`, 409);
+			return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 		}
 		console.error('API /register: An unexpected error occurred.', e);
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
 		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 		const msg = lang === 'ja' ? '予期しないエラーが発生しました。しばらくしてから再度お試しください。' : 'An unexpected error occurred. Please try again later.';
-		return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/register">Back to register</a></p></body></html>`, 500);
+		return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 	}
 });
 
@@ -239,7 +239,7 @@ api.post('/login', async (c) => {
 		let lang = 'en';
 		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名とパスワードを両方入力してください。' : 'Please provide both username and password.';
-		return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/login">Back to login</a></p></body></html>`, 400);
+		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
 
 	console.log(`API /login: Attempting to log in user: ${username}`);
@@ -251,7 +251,7 @@ api.post('/login', async (c) => {
 		let lang = 'en';
 		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名またはパスワードが正しくありません。' : 'Invalid username or password.';
-		return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/login">Back to login</a></p></body></html>`, 401);
+		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
 
 	console.log(`API /login: User found. Verifying password for: ${username}`);
@@ -263,7 +263,7 @@ api.post('/login', async (c) => {
 		let lang = 'en';
 		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名またはパスワードが正しくありません。' : 'Invalid username or password.';
-		return c.html(`<html><body><p>${msg}</p><p><a href="/${lang}/login">Back to login</a></p></body></html>`, 401);
+		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
 
 	console.log(`API /login: Password valid. Creating session for user id: ${user.id}`);
