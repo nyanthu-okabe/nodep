@@ -5,11 +5,11 @@
 	"compatibility_date": "2025-11-01",
 	"minify": true,
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	},
 	"assets": {
 		"binding": "ASSETS",
-		"directory": "./public"
+		"directory": "./public",
 	},
 	"unsafe": {
 		"bindings": [
@@ -19,16 +19,16 @@
 				"namespace_id": "1002",
 				"simple": {
 					"limit": 5,
-					"period": 60
-				}
-			}
-		]
+					"period": 60,
+				},
+			},
+		],
 	},
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_name": "nodep-cloudflare-db",
-			"database_id": "0347c246-1119-49ac-ab26-41a92de02359"
-		}
-	]
+			"database_id": "0347c246-1119-49ac-ab26-41a92de02359",
+		},
+	],
 }

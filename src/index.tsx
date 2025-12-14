@@ -379,7 +379,7 @@ app.get('/:lang', async (c) => {
 // A dynamic page route that loads a page based on the language and page name.
 app.get('/:lang/:page', async (c) => {
 	const { lang, page } = c.req.param();
-	const protectedPages = ['apps', 'sites', 'bot', 'docs'];
+	const protectedPages = ['bot'];
 
 	if (page === 'logout') {
 		return c.notFound();
