@@ -1,14 +1,34 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	  "name": "nyanthu-worker",
-	  "main": "src/index.tsx",
-	  "compatibility_date": "2025-11-01",
+	"name": "nyanthu-worker",
+	"main": "src/index.tsx",
+	"compatibility_date": "2025-11-01",
 	"minify": true,
-"observability": {
+	"observability": {
 		"enabled": true
 	},
 	"assets": {
 		"binding": "ASSETS",
 		"directory": "./public"
-	}
+	},
+	"unsafe": {
+		"bindings": [
+			{
+				"name": "RATE_LIMITER",
+				"type": "ratelimit",
+				"namespace_id": "1002",
+				"simple": {
+					"limit": 5,
+					"period": 60
+				}
+			}
+		]
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "nodep-cloudflare-db",
+			"database_id": "0347c246-1119-49ac-ab26-41a92de02359"
+		}
+	]
 }

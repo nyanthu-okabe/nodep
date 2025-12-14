@@ -1,13 +1,13 @@
 import { HonoRequest } from 'hono';
+import { FC } from 'hono/jsx';
+import { Context } from 'hono';
 import en from '../lang/en.json';
 import ja from '../lang/ja.json';
 import { nav } from '../config/nav';
 import { asset } from '../config/asset';
 
 type LayoutProps = {
-	honoContext: {
-		req: HonoRequest;
-	};
+	honoContext: Context<{ Variables: { user: { id: number; username: string } | null } }>;
 	children: any;
 };
 
@@ -30,6 +30,8 @@ export const Layout: FC<LayoutProps> = (props) => {
 	const t = text[lang];
 	// Create the language prefix for the URLs.
 	const langPrefix = `/${lang}`;
+	// Get user from context
+	const user = props.honoContext.get('user');
 
 	return (
 		<html lang={lang}>
@@ -63,6 +65,24 @@ export const Layout: FC<LayoutProps> = (props) => {
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 				{/* The main stylesheet for the application. */}
 				<link rel="stylesheet" href={asset.css} />
+				<style>{`
+					.logout-button {
+						background: none;
+						border: none;
+						cursor: pointer;
+						color: var(--muted);
+						font-size: 0.95rem;
+						text-decoration: none;
+						opacity: 0.8;
+						transition: 0.15s;
+						padding: 0;
+						font-family: inherit;
+					}
+					.logout-button:hover {
+						color: var(--text);
+						opacity: 1;
+					}
+				`}</style>
 			</head>
 
 			<body>
@@ -81,9 +101,21 @@ export const Layout: FC<LayoutProps> = (props) => {
 							{nav.map((item) => (
 								<a href={`${langPrefix}${item.path}`}>{t[item.name]}</a>
 							))}
-							<a>
-								<div class="dli-apps"></div>
-							</a>
+							{user ? (
+								<>
+									<span>Welcome, {user.username}!</span>
+									<form action="/api/logout" method="post" style="display: inline;">
+										<button type="submit" class="logout-button">
+											Logout
+										</button>
+									</form>
+								</>
+							) : (
+								<>
+									<a href={`${langPrefix}/login`}>Login</a>
+									<a href={`${langPrefix}/register`}>Register</a>
+								</>
+							)}
 						</nav>
 					</div>
 				</header>

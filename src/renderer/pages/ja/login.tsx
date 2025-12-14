@@ -1,20 +1,22 @@
 import type { FC } from 'hono/jsx';
 
-const loginPage: FC = () => {
+const LoginPage: FC = () => {
 	return (
 		<section id="login">
-			<h2>Login</h2>
-			<form>
+			<h3>ログイン</h3>
+			<form id="login-form" method="POST" action="/api/login">
 				<p>
-					<input type="email" name="email" placeholder="Email" required />
+					<input type="text" name="username" placeholder="ユーザー名" required />
 					<br />
-					<input type="password" name="password" placeholder="Password" required />
+					<input type="password" name="password" placeholder="パスワード" required />
 					<br />
 					<br />
-					<input type="submit" value="Login" />
+					<input type="submit" value="ログイン" />
 				</p>
 			</form>
+			<div id="error-message" style="color: red;"></div>
+
 		</section>
 	);
 };
-export default loginPage;
+export default LoginPage;

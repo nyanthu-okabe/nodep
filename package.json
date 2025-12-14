@@ -19,6 +19,8 @@
 		"wrangler": "^4.45.3"
 	},
 	"dependencies": {
-		"hono": "^4.10.4"
+		"@hono-rate-limiter/cloudflare": "^0.2.2",
+		"hono": "^4.10.4",
+		"hono-rate-limiter": "^0.4.2"
 	}
 }

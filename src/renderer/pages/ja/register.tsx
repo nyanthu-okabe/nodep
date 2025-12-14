@@ -1,24 +1,22 @@
 import type { FC } from 'hono/jsx';
 
-const registerPage: FC = () => {
+const RegisterPage: FC = () => {
 	return (
 		<section id="register">
-			<h2>Register</h2>
-			<form>
+			<h3>ユーザー登録</h3>
+			<form id="register-form" method="POST" action="/api/register">
 				<p>
-					<input type="text" name="username" placeholder="Username" required />
+					<input type="text" name="username" placeholder="ユーザー名" required />
 					<br />
-					<input type="email" name="email" placeholder="Email" required />
-					<br />
-					<input type="password" name="password" placeholder="Password" required />
-					<br />
-					<input type="checkbox" name="terms" required /> <a href="/en/policy">利用規約</a>に同意する
+					<input type="password" name="password" placeholder="パスワード (8文字以上)" required />
 					<br />
 					<br />
-					<input type="submit" value="Register" />
+					<input type="submit" value="登録" />
 				</p>
 			</form>
+			<div id="error-message" style="color: red;"></div>
+
 		</section>
 	);
 };
-export default registerPage;
+export default RegisterPage;
