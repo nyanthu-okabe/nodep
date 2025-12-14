@@ -63,6 +63,14 @@ const verifyPassword = async (password: string, hash: string, salt: string) => {
 
 // Session middleware
 app.use('*', async (c, next) => {
+	// Strict security headers for safety and performance
+	c.header('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+	c.header('X-Content-Type-Options', 'nosniff');
+	c.header('X-Frame-Options', 'DENY');
+	c.header('Referrer-Policy', 'no-referrer');
+	c.header('Permissions-Policy', 'geolocation=()');
+	c.header('X-XSS-Protection', '0');
+
 	const sessionId = getCookie(c, 'session_id');
 	if (!sessionId) {
 		console.log('Session middleware: No session cookie found.');
@@ -74,9 +82,7 @@ app.use('*', async (c, next) => {
 	console.log(`Session middleware: Found session cookie: ${sessionId}`);
 
 	try {
-		const { results } = await c.env.DB.prepare('SELECT * FROM sessions WHERE id = ? AND expires_at > ?')
-			.bind(sessionId, Date.now())
-			.all();
+		const { results } = await c.env.DB.prepare('SELECT * FROM sessions WHERE id = ? AND expires_at > ?').bind(sessionId, Date.now()).all();
 
 		const session = results[0] as { id: string; user_id: number } | undefined;
 
@@ -112,14 +118,13 @@ app.use('*', async (c, next) => {
 	await next();
 });
 
-
 // API routes
 const api = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 api.use(
 	cloudflareRateLimiter({
 		rateLimitBinding: (c) => c.env.RATE_LIMITER,
 		keyGenerator: (c) => c.req.header('cf-connecting-ip') ?? 'ip',
-	})
+	}),
 );
 
 api.post('/register', async (c) => {
@@ -145,8 +150,15 @@ api.post('/register', async (c) => {
 		console.log('API /register: Invalid input.');
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
-		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
-		const msg = lang === 'ja' ? '有効なユーザー名と、8文字以上のパスワードを入力してください。' : 'Please provide a valid username and a password with at least 8 characters.';
+		try {
+			const p = new URL(referer).pathname;
+			const parts = p.split('/');
+			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+		} catch (e) {}
+		const msg =
+			lang === 'ja'
+				? '有効なユーザー名と、8文字以上のパスワードを入力してください。'
+				: 'Please provide a valid username and a password with at least 8 characters.';
 		return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 	}
 
@@ -158,12 +170,12 @@ api.post('/register', async (c) => {
 		const insertInfo = await c.env.DB.prepare('INSERT INTO users (username, password, salt) VALUES (?, ?, ?)')
 			.bind(username, hash, salt)
 			.run();
-		
+
 		console.log('API /register: User inserted, info:', insertInfo);
 
 		console.log(`API /register: Fetching newly created user: ${username}`);
-		const user = await c.env.DB.prepare('SELECT id FROM users WHERE username = ?').bind(username).first<{id: number}>();
-		
+		const user = await c.env.DB.prepare('SELECT id FROM users WHERE username = ?').bind(username).first<{ id: number }>();
+
 		if (!user) {
 			console.error('API /register: CRITICAL - Just-inserted user not found.');
 			throw new Error('Failed to retrieve user after creation.');
@@ -180,12 +192,12 @@ api.post('/register', async (c) => {
 		console.log(`API /register: Session created: ${sessionId}. Setting cookie.`);
 		setCookie(c, 'session_id', sessionId, {
 			httpOnly: true,
-			secure: false,
+			secure: true,
 			sameSite: 'Lax',
 			expires: expires,
 			path: '/',
 		});
-		
+
 		console.log('API /register: Registration successful.');
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
@@ -195,21 +207,34 @@ api.post('/register', async (c) => {
 			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
 		} catch (e) {}
 		return c.redirect(`/${lang}/apps`);
-
 	} catch (e: any) {
 		if (e.message?.includes('UNIQUE constraint failed')) {
 			console.log(`API /register: Username ${username} already taken.`);
 			const referer = c.req.header('referer') || c.req.header('referrer') || '';
 			let lang = 'en';
-			try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
-			const msg = lang === 'ja' ? 'このユーザー名は既に使用されています。他の名前を選んでください。' : 'That username is already taken. Please choose another.';
+			try {
+				const p = new URL(referer).pathname;
+				const parts = p.split('/');
+				if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+			} catch (e) {}
+			const msg =
+				lang === 'ja'
+					? 'このユーザー名は既に使用されています。他の名前を選んでください。'
+					: 'That username is already taken. Please choose another.';
 			return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 		}
 		console.error('API /register: An unexpected error occurred.', e);
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
-		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
-		const msg = lang === 'ja' ? '予期しないエラーが発生しました。しばらくしてから再度お試しください。' : 'An unexpected error occurred. Please try again later.';
+		try {
+			const p = new URL(referer).pathname;
+			const parts = p.split('/');
+			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+		} catch (e) {}
+		const msg =
+			lang === 'ja'
+				? '予期しないエラーが発生しました。しばらくしてから再度お試しください。'
+				: 'An unexpected error occurred. Please try again later.';
 		return c.redirect(`/${lang}/register?error=${encodeURIComponent(msg)}`);
 	}
 });
@@ -237,19 +262,29 @@ api.post('/login', async (c) => {
 		console.log('API /login: Invalid input.');
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
-		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
+		try {
+			const p = new URL(referer).pathname;
+			const parts = p.split('/');
+			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+		} catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名とパスワードを両方入力してください。' : 'Please provide both username and password.';
 		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
 
 	console.log(`API /login: Attempting to log in user: ${username}`);
-	const user = await c.env.DB.prepare('SELECT * FROM users WHERE username = ?').bind(username).first<{id: number; password: string; salt: string }>();
+	const user = await c.env.DB.prepare('SELECT * FROM users WHERE username = ?')
+		.bind(username)
+		.first<{ id: number; password: string; salt: string }>();
 
 	if (!user) {
 		console.log(`API /login: User not found: ${username}`);
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
-		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
+		try {
+			const p = new URL(referer).pathname;
+			const parts = p.split('/');
+			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+		} catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名またはパスワードが正しくありません。' : 'Invalid username or password.';
 		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
@@ -261,7 +296,11 @@ api.post('/login', async (c) => {
 		console.log(`API /login: Invalid password for user: ${username}`);
 		const referer = c.req.header('referer') || c.req.header('referrer') || '';
 		let lang = 'en';
-		try { const p = new URL(referer).pathname; const parts = p.split('/'); if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1]; } catch (e) {}
+		try {
+			const p = new URL(referer).pathname;
+			const parts = p.split('/');
+			if (parts[1] === 'ja' || parts[1] === 'en') lang = parts[1];
+		} catch (e) {}
 		const msg = lang === 'ja' ? 'ユーザー名またはパスワードが正しくありません。' : 'Invalid username or password.';
 		return c.redirect(`/${lang}/login?error=${encodeURIComponent(msg)}`);
 	}
@@ -273,16 +312,16 @@ api.post('/login', async (c) => {
 	await c.env.DB.prepare('INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)')
 		.bind(sessionId, user.id, expires.getTime())
 		.run();
-	
+
 	console.log(`API /login: Session created: ${sessionId}. Setting cookie.`);
 	setCookie(c, 'session_id', sessionId, {
 		httpOnly: true,
-		secure: false,
+		secure: true,
 		sameSite: 'Lax',
 		expires: expires,
 		path: '/',
 	});
-	
+
 	console.log(`API /login: Login successful for user: ${username}`);
 	const referer = c.req.header('referer') || c.req.header('referrer') || '';
 	let lang = 'en';
@@ -303,7 +342,7 @@ api.post('/logout', async (c) => {
 	}
 	console.log('API /logout: Deleting session cookie.');
 	deleteCookie(c, 'session_id', { path: '/' });
-	
+
 	const lang = c.req.param('lang') || 'en';
 	console.log(`API /logout: Redirecting to /${lang}/login.`);
 	return c.redirect(`/${lang}/login`);
