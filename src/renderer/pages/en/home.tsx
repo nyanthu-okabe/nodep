@@ -7,7 +7,7 @@ const HomePage: FC = () => {
 				<canvas id="cobe"></canvas>
 				<h1 style="color: #333333">Maximize comfort and speed</h1>
 				<p style="color: #555555">Fast and good usability, no matter how low the client specs</p>
-				<a href="/demo" class="btn">
+				<a href="https://demo.nyanthu.com" class="btn">
 					View Demo
 				</a>
 				<a href="mailto:contact@nyanthu.com" class="btn2">

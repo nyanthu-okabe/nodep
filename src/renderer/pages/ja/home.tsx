@@ -7,7 +7,7 @@ const HomePage: FC = () => {
 				<canvas id="cobe"></canvas>
 				<h1 style="color: #333333">快適さと速さを最大化</h1>
 				<p style="color: #555555">クライアントのスペックがどんなに低くても、高速で優れたユーザビリティを</p>
-				<a href="/demo" class="btn">
+				<a href="https://demo.nyanthu.com" class="btn">
 					デモを見る
 				</a>
 				<a href="mailto:contact@nyanthu.com" class="btn2">
